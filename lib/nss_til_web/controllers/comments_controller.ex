@@ -40,7 +40,6 @@ defmodule NssTilWeb.CommentsController do
       created_at :: text
     """
     |> Db.query([til_id, text, user_id], to_json: true)
-    |> IO.inspect
     |> Response.send_response(conn)
   end
 end

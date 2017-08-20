@@ -6,14 +6,27 @@ defmodule NssTilWeb.TilController do
 
   def get_tils(conn, _params) do
     """
+    with vote as (
+      select
+        til_id,
+        sum(case when value > 0 then 1 else 0 end) upvote_count,
+        sum(case when value < 0 then 1 else 0 end) downvote_count,
+        sum(case when value != 0 then 1 else 0 end) vote_count
+      from til.vote
+      group by til_id
+    )
     select
-      id,
-      text,
-      upvote_count,
-      downvote_count,
-      user_id,
-      created_at :: text
-    from til.til
+      t.id,
+      t.text,
+      v.upvote_count,
+      v.downvote_count,
+      v.vote_count,
+      t.user_id,
+      t.created_at :: text
+    from til.til t
+    left
+    join vote v
+      on v.til_id = t.id
     """
     |> Db.query(to_json: true)
     |> Response.send_response(conn)
@@ -31,50 +44,10 @@ defmodule NssTilWeb.TilController do
     returning
       id,
       text,
-      upvote_count,
-      downvote_count,
       user_id,
       created_at :: text
     """
     |> Db.query([text, user_id], to_json: true)
-    |> Response.send_response(conn)
-  end
-
-  def upvote_til(conn, %{"til_id" => til_id}) do
-    id = String.to_integer(til_id)
-
-    """
-    update til.til
-      set upvote_count = upvote_count + 1
-    where id = $1
-    returning
-      id,
-      text,
-      upvote_count,
-      downvote_count,
-      user_id,
-      created_at :: text
-    """
-    |> Db.query([id], to_json: true)
-    |> Response.send_response(conn)
-  end
-
-  def downvote_til(conn, %{"til_id" => til_id}) do
-    id = String.to_integer(til_id)
-
-    """
-    update til.til
-      set downvote_count = downvote_count + 1
-    where id = $1
-    returning
-      id,
-      text,
-      upvote_count,
-      downvote_count,
-      user_id,
-      created_at :: text
-    """
-    |> Db.query([id], to_json: true)
     |> Response.send_response(conn)
   end
 end
