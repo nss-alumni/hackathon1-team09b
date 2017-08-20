@@ -15,7 +15,7 @@ defmodule NssTilWeb.TilController do
       created_at :: text
     from til.til
     """
-    |> Db.query
+    |> Db.query(to_json: true)
     |> Response.send_response(conn)
   end
 end
