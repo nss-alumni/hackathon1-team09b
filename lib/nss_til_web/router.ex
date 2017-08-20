@@ -40,6 +40,7 @@ defmodule NssTilWeb.Router do
     post "/tils", TilController, :create_til
     post "/tils/:til_id/upvote", VoteController, :upvote_til
     post "/tils/:til_id/downvote", VoteController, :downvote_til
+    post "/tils/:til_id/clearvote", VoteController, :clear_til_vote
     post "/tils/:til_id/comments", CommentsController, :create_comment
   end
 end
