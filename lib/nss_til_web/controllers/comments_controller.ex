@@ -16,6 +16,7 @@ defmodule NssTilWeb.CommentsController do
       created_at :: text
     from til.comment
     where til_id = $1
+    order by created_at
     """
     |> Db.query([til_id], to_json: true)
     |> Response.send_response(conn)
