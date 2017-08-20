@@ -11,7 +11,8 @@ defmodule NssTilWeb.TilController do
         til_id,
         sum(case when value > 0 then 1 else 0 end) upvote_count,
         sum(case when value < 0 then 1 else 0 end) downvote_count,
-        sum(case when value != 0 then 1 else 0 end) vote_count
+        sum(case when value != 0 then 1 else 0 end) vote_count,
+        sum(value) score
       from til.vote
       group by til_id
     )
@@ -21,12 +22,14 @@ defmodule NssTilWeb.TilController do
       v.upvote_count,
       v.downvote_count,
       v.vote_count,
+      coalesce(v.score, 0) score,
       t.user_id,
       t.created_at :: text
     from til.til t
     left
     join vote v
       on v.til_id = t.id
+    order by score desc, created_at desc
     """
     |> Db.query(to_json: true)
     |> Response.send_response(conn)
