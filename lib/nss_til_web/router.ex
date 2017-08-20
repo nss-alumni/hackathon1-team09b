@@ -24,5 +24,7 @@ defmodule NssTilWeb.Router do
 
     get "/tils", TilController, :get_tils
     post "/tils", TilController, :create_til
+    post "/tils/:til_id/upvote", TilController, :upvote_til
+    post "/tils/:til_id/downvote", TilController, :downvote_til
   end
 end

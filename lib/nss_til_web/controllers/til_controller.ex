@@ -39,4 +39,42 @@ defmodule NssTilWeb.TilController do
     |> Db.query([text, user_id], to_json: true)
     |> Response.send_response(conn)
   end
+
+  def upvote_til(conn, %{"til_id" => til_id}) do
+    id = String.to_integer(til_id)
+
+    """
+    update til.til
+      set upvote_count = upvote_count + 1
+    where id = $1
+    returning
+      id,
+      text,
+      upvote_count,
+      downvote_count,
+      user_id,
+      created_at :: text
+    """
+    |> Db.query([id], to_json: true)
+    |> Response.send_response(conn)
+  end
+
+  def downvote_til(conn, %{"til_id" => til_id}) do
+    id = String.to_integer(til_id)
+
+    """
+    update til.til
+      set downvote_count = downvote_count + 1
+    where id = $1
+    returning
+      id,
+      text,
+      upvote_count,
+      downvote_count,
+      user_id,
+      created_at :: text
+    """
+    |> Db.query([id], to_json: true)
+    |> Response.send_response(conn)
+  end
 end
