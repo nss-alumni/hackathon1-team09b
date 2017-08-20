@@ -18,7 +18,16 @@ defmodule NssTilWeb.TilController do
     |> send_response(conn)
   end
 
-  defp send_response({:ok, data}, conn), do: json(conn, success(data))
+  defp send_response({:error, message}, conn) do
+    conn
+    |> Plug.Conn.put_status(:internal_server_error)
+    |> json(error(message))
+  end
+
+  defp send_response({:ok, data}, conn) do
+    json(conn, success(data))
+  end
 
   defp success(data), do: %{status: "success", data: data}
+  defp error(message), do: %{status: "error", errors: [%{message: message}]}
 end
