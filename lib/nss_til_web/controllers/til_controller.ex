@@ -2,6 +2,7 @@ defmodule NssTilWeb.TilController do
   use NssTilWeb, :controller
 
   alias NssTil.Db
+  alias NssTilWeb.Response
 
   def get_tils(conn, _params) do
     """
@@ -15,19 +16,6 @@ defmodule NssTilWeb.TilController do
     from til.til
     """
     |> Db.query
-    |> send_response(conn)
+    |> Response.send_response(conn)
   end
-
-  defp send_response({:error, message}, conn) do
-    conn
-    |> Plug.Conn.put_status(:internal_server_error)
-    |> json(error(message))
-  end
-
-  defp send_response({:ok, data}, conn) do
-    json(conn, success(data))
-  end
-
-  defp success(data), do: %{status: "success", data: data}
-  defp error(message), do: %{status: "error", errors: [%{message: message}]}
 end
