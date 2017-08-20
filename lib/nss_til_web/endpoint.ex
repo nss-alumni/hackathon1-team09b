@@ -38,6 +38,7 @@ defmodule NssTilWeb.Endpoint do
     key: "_nss_til_key",
     signing_salt: "XQg6nicI"
 
+  plug CORSPlug, headers: ["*"]
   plug NssTilWeb.Router
 
   @doc """
