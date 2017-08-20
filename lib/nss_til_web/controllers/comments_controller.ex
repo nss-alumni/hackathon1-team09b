@@ -9,12 +9,16 @@ defmodule NssTilWeb.CommentsController do
 
     """
     select
-      id,
-      text,
-      til_id,
-      user_id,
-      created_at :: text
-    from til.comment
+      c.id,
+      c.text,
+      c.til_id,
+      c.user_id,
+      c.created_at :: text,
+      u.name user_name,
+      u.image_url user_image
+    from til.comment c
+    join til.user u
+      on c.user_id = u.id
     where til_id = $1
     order by created_at
     """

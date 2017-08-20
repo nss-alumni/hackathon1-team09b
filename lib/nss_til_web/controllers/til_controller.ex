@@ -24,11 +24,15 @@ defmodule NssTilWeb.TilController do
       v.vote_count,
       coalesce(v.score, 0) score,
       t.user_id,
-      t.created_at :: text
+      t.created_at :: text,
+      u.name user_name,
+      u.image_url user_image
     from til.til t
     left
     join vote v
       on v.til_id = t.id
+    join til.user u
+      on t.user_id = u.id
     order by score desc, created_at desc
     """
     |> Db.query(to_json: true)
