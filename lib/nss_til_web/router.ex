@@ -23,5 +23,6 @@ defmodule NssTilWeb.Router do
     pipe_through :api
 
     get "/tils", TilController, :get_tils
+    post "/tils", TilController, :create_til
   end
 end
