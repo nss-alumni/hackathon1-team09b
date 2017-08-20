@@ -8,7 +8,7 @@ defmodule NssTil.Db do
     |> format
   end
 
-  defp format({:error, _} = error), do: error
+  defp format({:error, message}), do: {:error, message.postgres.message}
   defp format({:ok, %Postgrex.Result{columns: nil}}), do: {:ok, []}
   defp format({:ok, %Postgrex.Result{columns: columns, rows: rows}}) do
     {:ok, Enum.map(rows, &rows_to_maps(columns, &1))}
