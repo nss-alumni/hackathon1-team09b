@@ -35,6 +35,21 @@ defmodule NssTilWeb.VoteController do
     |> Response.send_response(conn)
   end
 
+  def get_user_votes(conn, %{"user_id" => user_id}) do
+    user_id = String.to_integer(user_id)
+
+    """
+    select
+      v.til_id,
+      v.user_id,
+      v.value
+    from til.vote v
+    where v.user_id = $1
+    """
+    |> Db.query([user_id], to_json: true)
+    |> Response.send_response(conn)
+  end
+
   defp vote(til_id, user_id, value) do
     """
     insert into til.vote
