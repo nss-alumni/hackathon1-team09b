@@ -20,4 +20,27 @@ defmodule NssTilWeb.CommentsController do
     |> Db.query([til_id], to_json: true)
     |> Response.send_response(conn)
   end
+
+  def create_comment(conn, %{
+    "til_id" => til_id,
+    "text" => text,
+  }) do
+    til_id = String.to_integer(til_id)
+    user_id = 1
+
+    """
+    insert into til.comment
+      (til_id, text, user_id) values
+      ($1, $2, $3)
+    returning
+      id,
+      text,
+      til_id,
+      user_id,
+      created_at :: text
+    """
+    |> Db.query([til_id, text, user_id], to_json: true)
+    |> IO.inspect
+    |> Response.send_response(conn)
+  end
 end
