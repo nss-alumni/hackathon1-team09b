@@ -8,7 +8,7 @@ defmodule NssTilWeb.VoteController do
   @downvote_value -1
 
   def upvote_til(conn, %{"til_id" => til_id}) do
-    user_id = 1
+    user_id = conn.assigns.user_id
 
     til_id
     |> String.to_integer
@@ -17,7 +17,7 @@ defmodule NssTilWeb.VoteController do
   end
 
   def downvote_til(conn, %{"til_id" => til_id}) do
-    user_id = 1
+    user_id = conn.assigns.user_id
 
     til_id
     |> String.to_integer

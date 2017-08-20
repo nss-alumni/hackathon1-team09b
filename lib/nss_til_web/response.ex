@@ -5,14 +5,19 @@ defmodule NssTilWeb.Response do
 
   import Phoenix.Controller, only: [json: 2]
 
+  alias Plug.Conn
+
   def send_response({:error, message}, conn) do
     conn
-    |> Plug.Conn.put_status(:internal_server_error)
+    |> Conn.put_status(:internal_server_error)
+    |> Conn.put_resp_content_type("application/json")
     |> json(error(message))
   end
 
   def send_response({:ok, data}, conn) do
-    json(conn, success(data))
+    conn
+    |> Conn.put_resp_content_type("application/json")
+    |> json(success(data))
   end
 
   defp success(data), do: %{status: "success", data: data}

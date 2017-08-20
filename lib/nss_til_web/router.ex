@@ -1,6 +1,8 @@
 defmodule NssTilWeb.Router do
   use NssTilWeb, :router
 
+  alias NssTilWeb.Plugs
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -13,6 +15,11 @@ defmodule NssTilWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth_api do
+    plug :accepts, ["json"]
+    plug Plugs.Auth
+  end
+
   scope "/", NssTilWeb do
     pipe_through :browser # Use the default browser stack
 
@@ -23,11 +30,16 @@ defmodule NssTilWeb.Router do
     pipe_through :api
 
     get "/tils", TilController, :get_tils
+    get "/tils/:til_id/comments", CommentsController, :get_comments
     get "/search", SearchController, :search
+  end
+
+  scope "/api", NssTilWeb do
+    pipe_through :auth_api
+
     post "/tils", TilController, :create_til
     post "/tils/:til_id/upvote", VoteController, :upvote_til
     post "/tils/:til_id/downvote", VoteController, :downvote_til
-    get "/tils/:til_id/comments", CommentsController, :get_comments
     post "/tils/:til_id/comments", CommentsController, :create_comment
   end
 end

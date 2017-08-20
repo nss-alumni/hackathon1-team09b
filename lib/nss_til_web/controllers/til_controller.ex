@@ -35,7 +35,7 @@ defmodule NssTilWeb.TilController do
   def create_til(conn, %{
     "text" => text
   }) do
-    user_id = 1
+    user_id = conn.assigns.user_id
 
     """
     insert into til.til

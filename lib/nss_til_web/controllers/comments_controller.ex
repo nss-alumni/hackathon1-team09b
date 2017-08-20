@@ -26,7 +26,7 @@ defmodule NssTilWeb.CommentsController do
     "text" => text,
   }) do
     til_id = String.to_integer(til_id)
-    user_id = 1
+    user_id = conn.assigns.user_id
 
     """
     insert into til.comment
