@@ -17,6 +17,7 @@ defmodule TilWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/tils", TilController, :get_tils
   end
 
   # Other scopes may use custom stacks.
