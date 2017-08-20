@@ -17,11 +17,11 @@ defmodule NssTilWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    get "/tils", TilController, :get_tils
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", NssTilWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", NssTilWeb do
+    pipe_through :api
+
+    get "/tils", TilController, :get_tils
+  end
 end
