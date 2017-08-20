@@ -1,4 +1,4 @@
-defmodule Til.DataCase do
+defmodule NssTil.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,20 +16,20 @@ defmodule Til.DataCase do
 
   using do
     quote do
-      alias Til.Repo
+      alias NssTil.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Til.DataCase
+      import NssTil.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Til.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(NssTil.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Til.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(NssTil.Repo, {:shared, self()})
     end
 
     :ok

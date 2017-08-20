@@ -1,5 +1,5 @@
-defmodule TilWeb.PageControllerTest do
-  use TilWeb.ConnCase
+defmodule NssTilWeb.PageControllerTest do
+  use NssTilWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

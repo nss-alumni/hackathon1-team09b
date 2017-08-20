@@ -1,4 +1,4 @@
-defmodule TilWeb.ChannelCase do
+defmodule NssTilWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,15 +21,15 @@ defmodule TilWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint TilWeb.Endpoint
+      @endpoint NssTilWeb.Endpoint
     end
   end
 
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Til.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(NssTil.Repo)
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Til.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(NssTil.Repo, {:shared, self()})
     end
     :ok
   end

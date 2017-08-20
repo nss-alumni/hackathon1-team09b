@@ -1,12 +1,12 @@
-defmodule TilWeb do
+defmodule NssTilWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use TilWeb, :controller
-      use TilWeb, :view
+      use NssTilWeb, :controller
+      use NssTilWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,17 +19,17 @@ defmodule TilWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: TilWeb
+      use Phoenix.Controller, namespace: NssTilWeb
       import Plug.Conn
-      import TilWeb.Router.Helpers
-      import TilWeb.Gettext
+      import NssTilWeb.Router.Helpers
+      import NssTilWeb.Gettext
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/til_web/templates",
-                        namespace: TilWeb
+      use Phoenix.View, root: "lib/nss_til_web/templates",
+                        namespace: NssTilWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
@@ -37,9 +37,9 @@ defmodule TilWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import TilWeb.Router.Helpers
-      import TilWeb.ErrorHelpers
-      import TilWeb.Gettext
+      import NssTilWeb.Router.Helpers
+      import NssTilWeb.ErrorHelpers
+      import NssTilWeb.Gettext
     end
   end
 
@@ -54,7 +54,7 @@ defmodule TilWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import TilWeb.Gettext
+      import NssTilWeb.Gettext
     end
   end
 

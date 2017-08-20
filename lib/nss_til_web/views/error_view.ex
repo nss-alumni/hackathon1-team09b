@@ -1,5 +1,5 @@
-defmodule TilWeb.ErrorView do
-  use TilWeb, :view
+defmodule NssTilWeb.ErrorView do
+  use NssTilWeb, :view
 
   def render("404.html", _assigns) do
     "Page not found"

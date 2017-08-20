@@ -1,9 +1,9 @@
-defmodule Til.Mixfile do
+defmodule NssTil.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :til,
+      app: :nss_til,
       version: "0.0.1",
       elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env),
@@ -19,7 +19,7 @@ defmodule Til.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Til.Application, []},
+      mod: {NssTil.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

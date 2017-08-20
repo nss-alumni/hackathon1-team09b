@@ -1,6 +1,6 @@
-defmodule Til do
+defmodule NssTil do
   @moduledoc """
-  Til keeps the contexts that define your domain
+  NssTil keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

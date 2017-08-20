@@ -1,14 +1,14 @@
-defmodule TilWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :til
+defmodule NssTilWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :nss_til
 
-  socket "/socket", TilWeb.UserSocket
+  socket "/socket", NssTilWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :til, gzip: false,
+    at: "/", from: :nss_til, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -35,10 +35,10 @@ defmodule TilWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_til_key",
-    signing_salt: "ky0qfx4/"
+    key: "_nss_til_key",
+    signing_salt: "XQg6nicI"
 
-  plug TilWeb.Router
+  plug NssTilWeb.Router
 
   @doc """
   Callback invoked for dynamically configuring the endpoint.

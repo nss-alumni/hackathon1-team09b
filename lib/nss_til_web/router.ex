@@ -1,5 +1,5 @@
-defmodule TilWeb.Router do
-  use TilWeb, :router
+defmodule NssTilWeb.Router do
+  use NssTilWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,7 +13,7 @@ defmodule TilWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", TilWeb do
+  scope "/", NssTilWeb do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
@@ -21,7 +21,7 @@ defmodule TilWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", TilWeb do
+  # scope "/api", NssTilWeb do
   #   pipe_through :api
   # end
 end

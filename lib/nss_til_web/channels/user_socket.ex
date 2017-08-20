@@ -1,8 +1,8 @@
-defmodule TilWeb.UserSocket do
+defmodule NssTilWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", TilWeb.RoomChannel
+  # channel "room:*", NssTilWeb.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
@@ -30,7 +30,7 @@ defmodule TilWeb.UserSocket do
   # Would allow you to broadcast a "disconnect" event and terminate
   # all active sockets and channels for a given user:
   #
-  #     TilWeb.Endpoint.broadcast("user_socket:#{user.id}", "disconnect", %{})
+  #     NssTilWeb.Endpoint.broadcast("user_socket:#{user.id}", "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
   def id(_socket), do: nil

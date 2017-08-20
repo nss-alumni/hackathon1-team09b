@@ -6,15 +6,15 @@
 use Mix.Config
 
 # General application configuration
-config :til,
-  ecto_repos: [Til.Repo]
+config :nss_til,
+  ecto_repos: [NssTil.Repo]
 
 # Configures the endpoint
-config :til, TilWeb.Endpoint,
+config :nss_til, NssTilWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "Wb1IISAwntxXZCll6CacPWJ9QHHdgrYyzuH6lOUDM6imU8Y+Nb7XmcDg4nvukY2t",
-  render_errors: [view: TilWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Til.PubSub,
+  secret_key_base: "84mN2Ehz7e0MuYLSv3J4MbOnpQwChmV5vl6Q3F7lPOuOXjlc9dEn9xKo1Rx/5tm8",
+  render_errors: [view: NssTilWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: NssTil.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

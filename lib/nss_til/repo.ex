@@ -1,5 +1,5 @@
-defmodule Til.Repo do
-  use Ecto.Repo, otp_app: :til
+defmodule NssTil.Repo do
+  use Ecto.Repo, otp_app: :nss_til
 
   @doc """
   Dynamically loads the repository url from the

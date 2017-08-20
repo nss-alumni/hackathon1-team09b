@@ -1,5 +1,5 @@
-defmodule TilWeb.TilController do
-  use TilWeb, :controller
+defmodule NssTilWeb.TilController do
+  use NssTilWeb, :controller
 
   def get_tils(conn, _params) do
     """
@@ -17,7 +17,7 @@ defmodule TilWeb.TilController do
     |> send_response(conn)
   end
 
-  defp query(query, params \\ []), do: Ecto.Adapters.SQL.query(Til.Repo, query, params)
+  defp query(query, params \\ []), do: Ecto.Adapters.SQL.query(NssTil.Repo, query, params)
 
   defp send_response({:ok, data}, conn), do: json(conn, success(data))
 
