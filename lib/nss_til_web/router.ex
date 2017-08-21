@@ -33,6 +33,7 @@ defmodule NssTilWeb.Router do
     get "/tils/:til_id/comments", CommentsController, :get_comments
     get "/search", SearchController, :search
 
+    post "/slack_search", SearchController, :slack_search
     post "/slack_tils", TilController, :create_slack_til
   end
 
