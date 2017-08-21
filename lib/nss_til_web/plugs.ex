@@ -75,7 +75,7 @@ defmodule NssTilWeb.Plugs.Auth do
 
   defp first_result({:error, _} = error), do: log_error(error)
   defp first_result({:ok, []}), do: nil
-  defp first_result({:ok, [_] = list}), do: list |> List.first
+  defp first_result({:ok, [_ | _] = list}), do: list |> List.first
 
   defp get_id(%{"id" => id}), do: id
   defp get_id(_), do: nil
