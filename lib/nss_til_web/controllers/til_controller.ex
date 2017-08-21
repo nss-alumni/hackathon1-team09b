@@ -57,4 +57,19 @@ defmodule NssTilWeb.TilController do
     |> Db.query([text, user_id], to_json: true)
     |> Response.send_response(conn)
   end
+
+  def create_slack_til(conn, params) do
+    user_id = params["user_id"]
+    text = params["text"]
+
+    """
+    insert into til.til
+      (text, user_id) values
+      ($1, (select id from til.user where slack_id = $2))
+    returning
+      text
+    """
+    |> Db.query([text, user_id], to_json: true)
+    |> Response.send_response(conn)
+  end
 end
